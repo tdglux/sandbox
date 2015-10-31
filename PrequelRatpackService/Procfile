@@ -1,0 +1,3 @@
+---
+default_process_types:
+  web: build/install/PrequelRatpackService/bin/PrequelRatpackService build/install/PrequelRatpackService/app/ratpack.groovy

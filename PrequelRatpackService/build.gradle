@@ -1,0 +1,39 @@
+buildscript {
+  repositories {
+    jcenter()
+    mavenCentral()
+    maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
+  }
+
+  dependencies {
+    classpath "io.ratpack:ratpack-gradle:0.9.14"
+    classpath 'com.wiredforcode:gradle-heroku-plugin:1.0.0'
+  }
+}
+
+apply plugin: "io.ratpack.ratpack-groovy"
+
+repositories {
+  flatDir {
+    dirs 'libs'
+  }
+
+  jcenter()
+
+  maven {
+    url "http://clinker.netty.io/nexus/content/repositories/snapshots" 
+  }
+}
+
+dependencies {
+  runtime "org.slf4j:slf4j-simple:1.7.5"
+  compile name: 'mongo-java-driver-2.13.0-rc2'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
+task stage(dependsOn: ['clean', 'installApp'])
+
+defaultTasks "clean", "build", "installApp"
